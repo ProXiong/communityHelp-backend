@@ -5,19 +5,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quan.communityhelpModel.domain.UserTag;
 import com.quan.communityhelpuserCenterManager.mapper.Correlation.UserTagMapper;
-import com.quan.communityhelpuserCenterManager.service.inter.Correlations.UserTagService;
+import com.quan.communityhelpuserCenterManager.service.inter.Correlations.User_TagService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
-* @author quan
-* @description 针对表【user_tag(用户标签关联表)】的数据库操作Service实现
-* @createDate 2024-09-22 16:26:37
-*/
+ * @author quan
+ * @description 针对表【user_tag(用户标签关联表)】的数据库操作Service实现
+ * @createDate 2024-09-22 16:26:37
+ */
 @Service
 public class UserTagServiceImpl extends ServiceImpl<UserTagMapper, UserTag>
-    implements UserTagService {
+        implements User_TagService {
 
     @Override
     public boolean addUser_Tag(Long userId, Long tagId) {

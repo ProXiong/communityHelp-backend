@@ -1,9 +1,6 @@
 package com.quan.communityhelpuserCenterManager.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 import com.quan.communityhelpCommon.common.BaseResponse;
 import com.quan.communityhelpCommon.common.ErrorCode;
 import com.quan.communityhelpCommon.common.ResultUtils;
@@ -14,7 +11,7 @@ import com.quan.communityhelpModel.domain.User;
 import com.quan.communityhelpModel.dto.post.PostQueryRequest;
 import com.quan.communityhelpModel.dto.postfavour.PostFavourAddRequest;
 import com.quan.communityhelpModel.dto.postfavour.PostFavourQueryRequest;
-import com.quan.communityhelpModel.vo.PostVO;;
+import com.quan.communityhelpModel.vo.PostVO;
 import com.quan.communityhelpuserCenterManager.service.inter.Post.PostFavourService;
 import com.quan.communityhelpuserCenterManager.service.inter.Post.PostService;
 import com.quan.communityhelpuserCenterManager.service.inter.User.UserService;
@@ -23,6 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+;
 
 /**
  * 帖子收藏接口
@@ -33,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/post_favour")
 @Slf4j
-    public class PostFavourController {
+public class PostFavourController {
 
     @Resource
     private PostFavourService postFavourService;
@@ -94,13 +96,13 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @PostMapping("/list/page")
     public BaseResponse<Page<PostVO>> listFavourPostByPage(@RequestBody PostFavourQueryRequest postFavourQueryRequest,
-            HttpServletRequest request) {
+                                                           HttpServletRequest request) {
         if (postFavourQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         long current = postFavourQueryRequest.getCurrent();
         long size = postFavourQueryRequest.getPageSize();
-        Long userId = postFavourQueryRequest.getUserId();
+        java.lang.Long userId = postFavourQueryRequest.getUserId();
         // 限制爬虫
         ThrowUtils.throwIf(size > 20 || userId == null, ErrorCode.PARAMS_ERROR);
         Page<Post> postPage = postFavourService.listFavourPostByPage(new Page<>(current, size),

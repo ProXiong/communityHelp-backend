@@ -5,12 +5,13 @@
 <mapper namespace="com.quan.communityhelpuserCenterManager.mapper.User.TagMapper">
 
     <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.Tag">
-            <id property="tagId" column="tagId" jdbcType="BIGINT"/>
-            <result property="tagName" column="tagName" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
+        <id property="tagId" column="tagId" jdbcType="BIGINT"/>
+        <result property="tagName" column="tagName" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        tagId,tagName,description
+        tagId
+        ,tagName,description
     </sql>
 </mapper>

@@ -2,12 +2,9 @@ package com.quan.communityhelpuserCenterManager.service.impl.Correlations;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.quan.communityhelpModel.domain.Role;
 import com.quan.communityhelpModel.domain.UserRole;
-import com.quan.communityhelpuserCenterManager.mapper.User.RoleMapper;
 import com.quan.communityhelpuserCenterManager.mapper.Correlation.UserRoleMapper;
-import com.quan.communityhelpuserCenterManager.service.inter.Correlations.UserRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.quan.communityhelpuserCenterManager.service.inter.Correlations.User_RoleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
  */
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole>
-        implements UserRoleService {
+        implements User_RoleService {
     @Override
     public boolean addUser_Role(Long userId, Long roleId) {
         UserRole userRole = new UserRole();
@@ -36,24 +33,23 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole>
         );
     }
 
-    @Autowired
-    RoleMapper roleMapper;
-
     /**
-     * 根据用户获取角色信息
+     * 根据用户id获取角色id
      *
      * @param userId
      * @return
      */
     @Override
-    public Role[] getUserRoleInfos(Long userId) {
-        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
-        queryWrapper.inSql("roleId", "SELECT roleId FROM User_Role WHERE userId = " + userId);
-        List<Role> roles = roleMapper.selectList(queryWrapper);
-        return roles.toArray(new Role[0]);
+    public Long[] getRoleIdsByUserId(Long userId) {
+        List<UserRole> userRoles = this.list(new QueryWrapper<UserRole>().eq("userId", userId));
+        return userRoles.stream().map(UserRole::getRoleId).toArray(Long[]::new);
+    }
+
+    @Override
+    public Long[] getUserIdsByRoleId(Long roleId) {
+        List<UserRole> userRoles = this.list(new QueryWrapper<UserRole>().eq("roleId", roleId));
+        return userRoles.stream().map(UserRole::getUserId).toArray(Long[]::new);
     }
 }
-
-
 
 

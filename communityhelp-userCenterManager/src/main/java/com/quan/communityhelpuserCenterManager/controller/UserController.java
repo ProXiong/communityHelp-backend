@@ -2,18 +2,16 @@ package com.quan.communityhelpuserCenterManager.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.quan.communityhelpCommon.common.BaseResponse;
 import com.quan.communityhelpCommon.common.ErrorCode;
 import com.quan.communityhelpCommon.common.ResultUtils;
 import com.quan.communityhelpCommon.exception.BusinessException;
-import com.quan.communityhelpModel.request.UserQueryRequest;
 import com.quan.communityhelpModel.domain.User;
 import com.quan.communityhelpModel.request.UserLoginRequest;
+import com.quan.communityhelpModel.request.UserQueryRequest;
 import com.quan.communityhelpModel.request.UserRegisterRequest;
-
 import com.quan.communityhelpModel.vo.UserVO;
 import com.quan.communityhelpuserCenterManager.service.inter.User.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +50,6 @@ public class UserController {
     }
 
     /**
-     *
      * @param userLoginRequest
      * @param request
      * @return
@@ -131,7 +128,7 @@ public class UserController {
         }
         List<User> userList = userService.list(queryWrapper);
         List<UserVO> list = userList.stream().map(user -> userService.getUserVO(user)).collect(Collectors.toList
-        ());
+                ());
         return ResultUtils.success(list);// todo 安全用户信息
     }
 
@@ -157,7 +154,6 @@ public class UserController {
         }).collect(Collectors.toList());
         return ResultUtils.success(userVOList);
     }
-
 
 
     /**

@@ -1,28 +1,29 @@
 package com.quan.communityhelpModel.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 用户标签关联表
+ *
  * @TableName user_tag
  */
-@TableName(value ="user_tag")
+@TableName(value = "user_tag")
 @Data
 public class UserTag implements Serializable {
     /**
      * 用户 ID
      */
-    @TableId
+    @TableField
     private Long userId;
 
     /**
      * 标签 ID
      */
-    @TableId
+    @TableField
     private Long tagId;
 
     @TableField(exist = false)
@@ -41,7 +42,7 @@ public class UserTag implements Serializable {
         }
         UserTag other = (UserTag) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()));
+                && (this.getTagId() == null ? other.getTagId() == null : this.getTagId().equals(other.getTagId()));
     }
 
     @Override

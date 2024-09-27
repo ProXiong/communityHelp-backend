@@ -5,9 +5,9 @@
 <mapper namespace="com.quan.communityhelpuserCenterManager.mapper.User.RoleMapper">
 
     <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.Role">
-            <id property="roleId" column="roleId" jdbcType="BIGINT"/>
-            <result property="roleName" column="roleName" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
+        <id property="roleId" column="roleId" jdbcType="BIGINT"/>
+        <result property="roleName" column="roleName" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="getRolesByIds" resultType="com.quan.communityhelpModel.domain.Role">
         SELECT *
@@ -18,6 +18,7 @@
         </foreach>
     </select>
     <sql id="Base_Column_List">
-        roleId,roleName,description
+        roleId
+        ,roleName,description
     </sql>
 </mapper>

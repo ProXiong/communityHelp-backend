@@ -10,11 +10,11 @@ import com.quan.communityhelpModel.domain.PostFavour;
 import org.apache.ibatis.annotations.Param;
 
 /**
-* @author quan
-* @description 针对表【post_favour(帖子收藏)】的数据库操作Mapper
-* @createDate 2024-09-20 10:45:47
-* @Entity generator.domain.PostFavour
-*/
+ * @author quan
+ * @description 针对表【post_favour(帖子收藏)】的数据库操作Mapper
+ * @createDate 2024-09-20 10:45:47
+ * @Entity generator.domain.PostFavour
+ */
 public interface PostFavourMapper extends BaseMapper<PostFavour> {
     /**
      * 分页查询收藏帖子列表

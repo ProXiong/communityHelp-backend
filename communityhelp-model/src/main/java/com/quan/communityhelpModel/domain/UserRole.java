@@ -7,22 +7,21 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 
  * @TableName user_role
  */
-@TableName(value ="user_role")
+@TableName(value = "user_role")
 @Data
 public class UserRole implements Serializable {
     /**
-     * 
+     *
      */
-    @TableField(value ="userId")
+    @TableField(value = "userId")
     private Long userId;
 
     /**
-     * 
+     *
      */
-    @TableField (value ="roleId")
+    @TableField(value = "roleId")
     private Long roleId;
 
     @TableField(exist = false)
@@ -41,7 +40,7 @@ public class UserRole implements Serializable {
         }
         UserRole other = (UserRole) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
+                && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
     }
 
     @Override

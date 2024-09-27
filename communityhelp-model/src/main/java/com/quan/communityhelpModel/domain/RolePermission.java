@@ -7,20 +7,20 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 
  * @TableName role_permission
  */
-@TableName(value ="role_permission")
+@TableName(value = "role_permission")
 @Data
 public class RolePermission implements Serializable {
     /**
-     * 
+     *
      */
     @TableField(value = "roleId")
+    S
     private Long roleId;
 
     /**
-     * 
+     *
      */
     @TableField(value = "permissionId")
     private Long permissionId;
@@ -41,7 +41,7 @@ public class RolePermission implements Serializable {
         }
         RolePermission other = (RolePermission) that;
         return (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getPermissionId() == null ? other.getPermissionId() == null : this.getPermissionId().equals(other.getPermissionId()));
+                && (this.getPermissionId() == null ? other.getPermissionId() == null : this.getPermissionId().equals(other.getPermissionId()));
     }
 
     @Override

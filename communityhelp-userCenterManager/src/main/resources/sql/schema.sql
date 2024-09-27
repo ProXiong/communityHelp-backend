@@ -1,113 +1,58 @@
--- region 用户相关
--- 数据库初始化
--- 用户表todo 用户表设计不对
-CREATE TABLE  IF NOT EXISTS  User
+INSERT INTO User (userName, userAccount, userPassword, avatarUrl, gender, phone, email, userStatus, isDelete)
+VALUES
+('Alice', 'alice123', 'password123', 'http://example.com/avatar/alice.jpg', 'FEMALE', '12345678901', 'alice@example.com', 1, 0),
+('Bob', 'bob456', 'password456', 'http://example.com/avatar/bob.jpg', 'MALE', '12345678902', 'bob@example.com', 1, 0),
+('Charlie', 'charlie789', 'password789', NULL, 'OTHER', '12345678903', 'charlie@example.com', 1, 0);
+INSERT INTO Role (roleName, description)
+VALUES
+('admin', '管理员，具备所有权限'),
+('user', '普通用户，具有有限权限');
+INSERT INTO User_Role (userId, roleId)
+VALUES
+(1, 1), -- Alice 是管理员
+(2, 2), -- Bob 是普通用户
+(3, 2); -- Charlie 是普通用户
+INSERT INTO Permission (permissionName, description)
+VALUES
+('READ_POST', '查看帖子权限'),
+('WRITE_POST', '发布帖子权限'),
+('DELETE_POST', '删除帖子权限'),
+('MANAGE_USER', '管理用户权限');
+INSERT INTO Role_Permission (roleId, permissionId)
+VALUES
+(1, 1), -- 管理员具备查看帖子权限
+(1, 2), -- 管理员具备发布帖子权限
+(1, 3), -- 管理员具备删除帖子权限
+(1, 4), -- 管理员具备管理用户权限
+(2, 1); -- 普通用户具备查看帖子权限
+INSERT INTO Tag (tagName, description)
+VALUES
+('Technology', '与科技相关的帖子'),
+('Health', '与健康和保健相关的帖子'),
+('Lifestyle', '与生活方式和技巧相关的帖子');
+INSERT INTO user_Tag (userId, tagId)
+VALUES
+(1, 1), -- Alice 喜欢科技标签
+(1, 2), -- Alice 喜欢健康标签
+(2, 1), -- Bob 喜欢科技标签
+(3, 3); -- Charlie 喜欢生活方式标签
+INSERT INTO post (title, content, tags, userId, thumbNum, favourNum, createTime, updateTime, isDelete)
+VALUES
+('探索科技创新', '这篇帖子讨论了最新的科技创新。', '["Technology"]', 1, 10, 5, NOW(), NOW(), 0),
+('健康生活小贴士', '这篇帖子提供了一些健康生活的建议。', '["Health"]', 2, 5, 2, NOW(), NOW(), 0),
+('2023年生活技巧', '这篇帖子分享了一些实用的生活技巧。', '["Lifestyle"]', 3, 2, 1, NOW(), NOW(), 0);
+INSERT INTO post_thumb (postId, userId, createTime, updateTime)
+VALUES
+(1, 2, NOW(), NOW()), -- Bob 点赞了第一篇帖子
+(1, 3, NOW(), NOW()), -- Charlie 点赞了第一篇帖子
+(2, 1, NOW(), NOW()); -- Alice 点赞了第二篇帖子
+INSERT INTO post_favour (postId, userId, createTime, updateTime)
+VALUES
+(2, 1, NOW(), NOW()), -- Alice 收藏了第二篇帖子
+(3, 2, NOW(), NOW()); -- Bob 收藏了第三篇帖子
+CREATE TABLE IF NOT EXISTS Tag
 (
-    userId      BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'id',
-    userName    VARCHAR(256) NOT NULL DEFAULT 'Unnamed User' COMMENT '用户昵称',
-    userAccount  VARCHAR(256)                       NOT NULL COMMENT '账号',
-    userPassword VARCHAR(512)                       NOT NULL COMMENT '密码',
-    avatarUrl    VARCHAR(1024)                      NULL COMMENT '用户头像',
-    gender       ENUM ('MALE', 'FEMALE', 'OTHER')   NULL COMMENT '性别',
-    phone        VARCHAR(128)                       NULL COMMENT '电话',
-    email        VARCHAR(512)                       NULL COMMENT '邮箱',
-    userStatus   INT      DEFAULT 0                 NOT NULL COMMENT '1是0否正常',
-    createTime   DATETIME DEFAULT CURRENT_TIMESTAMP NULL COMMENT '创建时间',
-    updateTime   DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    isDelete     TINYINT  DEFAULT 0                 NOT NULL COMMENT '1是0否删除'
-) COMMENT '用户';
--- 角色表
-CREATE TABLE  IF NOT EXISTS Role
-(
-    roleId     BIGINT AUTO_INCREMENT PRIMARY KEY,
-    roleName   VARCHAR(255) NOT NULL UNIQUE, -- admin管理员, user普通用户
-    description TEXT
-);
--- 用户角色表
-CREATE TABLE  IF NOT EXISTS User_Role
-(
-    userId BIGINT,
-    roleId BIGINT,
-    PRIMARY KEY (userId, roleId),
-    FOREIGN KEY (userId) REFERENCES User (userId) ON DELETE CASCADE,
-    FOREIGN KEY (roleId) REFERENCES Role (roleId) ON DELETE CASCADE
-);
--- 权限表
-CREATE TABLE  IF NOT EXISTS Permission
-(
-    permissionId   BIGINT AUTO_INCREMENT PRIMARY KEY,
-    permissionName VARCHAR(255) NOT NULL UNIQUE,
-    description     TEXT
-);
--- 角色权限表
-CREATE TABLE  IF NOT EXISTS Role_Permission
-(
-    roleId       BIGINT,
-    permissionId BIGINT,
-    PRIMARY KEY (roleId, permissionId),
-    FOREIGN KEY (roleId) REFERENCES Role (roleId) ON DELETE CASCADE,
-    FOREIGN KEY (permissionId) REFERENCES Permission (permissionId) ON DELETE CASCADE
-);
--- endregion
-
--- region 帖子相关
--- 帖子表
-create table if not exists post
-(
-    id         bigint auto_increment comment 'id' primary key,
-    title      varchar(512)                       null comment '标题',
-    content    text                               null comment '内容',
-    tags       varchar(1024)                      null comment '标签列表（json 数组）',
-    thumbNum   int      default 0                 not null comment '点赞数',
-    favourNum  int      default 0                 not null comment '收藏数',
-    userId     bigint                             not null comment '创建用户 id',
-    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
-    isDelete   tinyint  default 0                 not null comment '是否删除',
-    index idx_userId (userId)
-    ) comment '帖子' collate = utf8mb4_unicode_ci;
-
--- 帖子点赞表（硬删除）
-create table if not exists post_thumb
-(
-    id         bigint auto_increment comment 'id' primary key,
-    postId     bigint                             not null comment '帖子 id',
-    userId     bigint                             not null comment '创建用户 id',
-    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
-    index idx_postId (postId),
-    index idx_userId (userId)
-    ) comment '帖子点赞';
-
--- 帖子收藏表（硬删除）
-create table if not exists post_favour
-(
-    id         bigint auto_increment comment 'id' primary key,
-    postId     bigint                             not null comment '帖子 id',
-    userId     bigint                             not null comment '创建用户 id',
-    createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
-    updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
-    index idx_postId (postId),
-    index idx_userId (userId)
-    ) comment '帖子收藏';
--- 注意mysql的注释
--- endregion
-
--- region 标签相关
--- 标签表
-CREATE TABLE IF NOT EXISTS Tag (
-                                   tagId BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '标签 ID',
-                                   tagName VARCHAR(256) NOT NULL UNIQUE COMMENT '标签名称',
-                                   description TEXT COMMENT '标签描述'
+    tagId       BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '标签 ID',
+    tagName     VARCHAR(256) NOT NULL UNIQUE COMMENT '标签名称',
+    description TEXT COMMENT '标签描述' -- '标签描述'已是中文
 ) COMMENT '标签';
--- 用户标签关联表
-CREATE TABLE IF NOT EXISTS user_Tag (
-                                        userId BIGINT NOT NULL COMMENT '用户 ID',
-                                        tagId BIGINT NOT NULL COMMENT '标签 ID',
-                                        PRIMARY KEY (userId, tagId),  -- 组合主键
-                                        FOREIGN KEY (userId) REFERENCES User (userId) ON DELETE CASCADE,
-                                        FOREIGN KEY (tagId) REFERENCES Tag (tagId) ON DELETE CASCADE
-) COMMENT '用户标签关联表';
-
--- endregion
-

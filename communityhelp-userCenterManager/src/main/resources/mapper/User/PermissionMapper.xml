@@ -5,12 +5,13 @@
 <mapper namespace="com.quan.communityhelpuserCenterManager.mapper.User.PermissionMapper">
 
     <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.Permission">
-            <id property="permissionId" column="permissionId" jdbcType="BIGINT"/>
-            <result property="permissionName" column="permissionName" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
+        <id property="permissionId" column="permissionId" jdbcType="BIGINT"/>
+        <result property="permissionName" column="permissionName" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        permissionId,permissionName,description
+        permissionId
+        ,permissionName,description
     </sql>
 </mapper>

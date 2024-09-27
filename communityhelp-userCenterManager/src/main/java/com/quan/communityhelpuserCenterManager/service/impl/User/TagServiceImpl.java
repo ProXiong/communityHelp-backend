@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
-* @author quan
-* @description 针对表【tag(标签)】的数据库操作Service实现
-* @createDate 2024-09-22 16:26:29
-*/
+ * @author quan
+ * @description 针对表【tag(标签)】的数据库操作Service实现
+ * @createDate 2024-09-22 16:26:29
+ */
 @Service
 public class TagServiceImpl extends ServiceImpl<TagMapper, Tag>
-    implements TagService {
+        implements TagService {
 
     @Override
     /**

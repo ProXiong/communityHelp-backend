@@ -34,5 +34,4 @@ public interface UserConstant {
     // https://space.bilibili.com/12890453/
 
 
-
 }

@@ -1,16 +1,14 @@
 package com.quan.communityhelpModel.request;
 
+import com.quan.communityhelpCommon.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import com.quan.communityhelpCommon.common.PageRequest;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 用户查询请求
- *
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

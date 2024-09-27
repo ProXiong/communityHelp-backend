@@ -5,8 +5,8 @@
 <mapper namespace="com.quan.communityhelpuserCenterManager.mapper.Correlation.UserRoleMapper">
 
     <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.UserRole">
-            <id property="userId" column="userId" jdbcType="BIGINT"/>
-            <id property="roleId" column="roleId" jdbcType="BIGINT"/>
+        <id property="userId" column="userId" jdbcType="BIGINT"/>
+        <id property="roleId" column="roleId" jdbcType="BIGINT"/>
     </resultMap>
     <select id="getRoleIdsByUserId" resultType="long">
         SELECT roleId
@@ -14,6 +14,7 @@
         WHERE userId = #{userId}
     </select>
     <sql id="Base_Column_List">
-        userId,roleId
+        userId
+        ,roleId
     </sql>
 </mapper>

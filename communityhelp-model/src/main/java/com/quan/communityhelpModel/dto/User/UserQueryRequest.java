@@ -1,9 +1,9 @@
 package com.quan.communityhelpModel.dto.User;
 
 
+import com.quan.communityhelpCommon.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import com.quan.communityhelpCommon.common.PageRequest;
 
 import java.io.Serializable;
 

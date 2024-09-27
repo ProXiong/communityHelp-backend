@@ -27,7 +27,7 @@ public class UserDTO {
 
 
     private String phone;
-   // @Email(message = "邮箱格式不正确")
+    // @Email(message = "邮箱格式不正确")
     private String email;
 
     // public  UserToUserDTO (){

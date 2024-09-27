@@ -4,22 +4,21 @@ package com.quan.communityhelpuserCenterManager.service.impl.User;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.quan.communityhelpCommon.common.ErrorCode;
-import com.quan.communityhelpCommon.enums.UserRoleEnum;
 import com.quan.communityhelpCommon.exception.BusinessException;
+import com.quan.communityhelpModel.domain.Role;
+import com.quan.communityhelpModel.domain.User;
 import com.quan.communityhelpModel.vo.UserVO;
-import com.quan.communityhelpuserCenterManager.service.impl.Correlations.UserRoleServiceImpl;
-import com.quan.communityhelpuserCenterManager.utils.UserUtils;
+import com.quan.communityhelpuserCenterManager.mapper.Correlation.UserRoleMapper;
 import com.quan.communityhelpuserCenterManager.mapper.User.RoleMapper;
 import com.quan.communityhelpuserCenterManager.mapper.User.UserMapper;
-import com.quan.communityhelpuserCenterManager.mapper.Correlation.UserRoleMapper;
+import com.quan.communityhelpuserCenterManager.service.impl.Correlations.UserRoleServiceImpl;
 import com.quan.communityhelpuserCenterManager.service.inter.User.UserService;
+import com.quan.communityhelpuserCenterManager.utils.UserUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
-import com.quan.communityhelpModel.domain.Role;
-import com.quan.communityhelpModel.domain.User;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -154,21 +153,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // todo 一个用户对应多个角色，这里只判断是否有admin角色，不合理
         // 权限还没用?
     }
+
     @Override
     public boolean isAdmin(User user) {
         if (user == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数错误");
         }
-        Role[] userRoleInfos = userRoleServiceImpl.getUserRoleInfos(user.getUserId());
-
-        for(Role role:userRoleInfos){
-            if (role.getRoleName().equals(UserRoleEnum.ADMIN.getValue())) {
+        Long[] roleIds = userRoleServiceImpl.getRoleIdsByUserId(user.getUserId());
+        for (Long role : roleIds) {
+            if (role.equals(1l)) {
                 return true;
             }
         }
-        // todo 一个用户对应多个角色，这里只判断是否有admin角色，不合理
         return false;
-
     }
 
     /**
@@ -200,9 +197,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @param userId 用户id
      * @return
      */
-    public List<Role> getUserRoles(Long userId) {
+    public List<Role> getUserRoles(java.lang.Long userId) {
         // 1. 获取用户对应的 roleIds
-        List<Long> roleIds = userRoleMapper.getRoleIdsByUserId(userId);
+        List<java.lang.Long> roleIds = userRoleMapper.getRoleIdsByUserId(userId);
 
         // 2. 如果没有角色，返回空列表
         if (roleIds.isEmpty()) {

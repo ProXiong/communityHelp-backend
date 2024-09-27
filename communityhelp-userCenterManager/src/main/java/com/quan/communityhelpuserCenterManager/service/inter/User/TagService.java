@@ -7,10 +7,10 @@ import com.quan.communityhelpModel.domain.Tag;
 import java.util.List;
 
 /**
-* @author quan
-* @description 针对表【tag(标签)】的数据库操作Service
-* @createDate 2024-09-22 16:26:29
-*/
+ * @author quan
+ * @description 针对表【tag(标签)】的数据库操作Service
+ * @createDate 2024-09-22 16:26:29
+ */
 public interface TagService extends IService<Tag> {
     // 添加标签
     boolean addTag(Tag tag);

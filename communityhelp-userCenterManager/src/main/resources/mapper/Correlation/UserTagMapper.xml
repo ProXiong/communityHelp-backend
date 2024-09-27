@@ -5,11 +5,12 @@
 <mapper namespace="com.quan.communityhelpuserCenterManager.mapper.Correlation.UserTagMapper">
 
     <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.UserTag">
-            <id property="userId" column="userId" jdbcType="BIGINT"/>
-            <id property="tagId" column="tagId" jdbcType="BIGINT"/>
+        <id property="userId" column="userId" jdbcType="BIGINT"/>
+        <id property="tagId" column="tagId" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        userId,tagId
+        userId
+        ,tagId
     </sql>
 </mapper>

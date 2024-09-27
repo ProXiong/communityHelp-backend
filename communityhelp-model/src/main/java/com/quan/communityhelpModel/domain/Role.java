@@ -9,25 +9,24 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 
  * @TableName role
  */
-@TableName(value ="role")
+@TableName(value = "role")
 @Data
 public class Role implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(type = IdType.AUTO)
-    private Long roleId;
+    private User roleId;
 
     /**
-     * 
+     *
      */
     private String roleName;
 
     /**
-     * 
+     *
      */
     private String description;
 
@@ -47,8 +46,8 @@ public class Role implements Serializable {
         }
         Role other = (Role) that;
         return (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-            && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+                && (this.getRoleName() == null ? other.getRoleName() == null : this.getRoleName().equals(other.getRoleName()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
     }
 
     @Override

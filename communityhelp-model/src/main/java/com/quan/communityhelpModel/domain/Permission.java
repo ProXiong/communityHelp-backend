@@ -9,25 +9,24 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 
  * @TableName permission
  */
-@TableName(value ="permission")
+@TableName(value = "permission")
 @Data
 public class Permission implements Serializable {
     /**
-     * 
+     *
      */
     @TableId(type = IdType.AUTO)
-    private Long permissionId;
+    private User permissionId;
 
     /**
-     * 
+     *
      */
     private String permissionName;
 
     /**
-     * 
+     *
      */
     private String description;
 
@@ -47,8 +46,8 @@ public class Permission implements Serializable {
         }
         Permission other = (Permission) that;
         return (this.getPermissionId() == null ? other.getPermissionId() == null : this.getPermissionId().equals(other.getPermissionId()))
-            && (this.getPermissionName() == null ? other.getPermissionName() == null : this.getPermissionName().equals(other.getPermissionName()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
+                && (this.getPermissionName() == null ? other.getPermissionName() == null : this.getPermissionName().equals(other.getPermissionName()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()));
     }
 
     @Override

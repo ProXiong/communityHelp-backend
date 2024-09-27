@@ -5,11 +5,12 @@
 <mapper namespace="com.quan.communityhelpuserCenterManager.mapper.Correlation.RolePermissionMapper">
 
     <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.RolePermission">
-            <id property="roleId" column="roleId" jdbcType="BIGINT"/>
-            <id property="permissionId" column="permissionId" jdbcType="BIGINT"/>
+        <id property="roleId" column="roleId" jdbcType="BIGINT"/>
+        <id property="permissionId" column="permissionId" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        roleId,permissionId
+        roleId
+        ,permissionId
     </sql>
 </mapper>

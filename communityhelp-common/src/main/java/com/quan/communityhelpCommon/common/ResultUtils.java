@@ -1,7 +1,6 @@
 package com.quan.communityhelpCommon.common;
 
 
-
 /**
  * 返回工具类
  *

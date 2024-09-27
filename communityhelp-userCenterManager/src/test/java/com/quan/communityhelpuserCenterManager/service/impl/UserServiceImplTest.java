@@ -15,7 +15,8 @@ import static org.junit.Assert.assertThrows;
 @RunWith(SpringJUnit4ClassRunner.class)
 class UserServiceImplTest {
     @Autowired
-    UserServiceImpl userService ;
+    UserServiceImpl userService;
+
     @Test
     void userRegister() {
         // 账户和密码参数为空，期望抛出异常
@@ -41,9 +42,9 @@ class UserServiceImplTest {
 
         // 账户长度大于4和密码都不为空，进行正常注册，期望返回用户ID
         try {
-            Long  userId =userService.userRegister("test33", "123456");
-            if(userId>0){
-                System.out.println("注册成功，用户ID为："+userId);
+            Long userId = userService.userRegister("test33", "123456");
+            if (userId > 0) {
+                System.out.println("注册成功，用户ID为：" + userId);
             }
         } catch (Exception e) {
             System.out.println("注册失败");
