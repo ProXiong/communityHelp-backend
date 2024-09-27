@@ -1,0 +1,14 @@
+# 线上配置文件
+spring:
+  # DataSource Config # 线上数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://bj-cynosdbmysql-grp-hvl9m3w2.sql.tencentcdb.com:21242/CommunityCares
+    username: root
+    password: SEnZxsdx9ra:nzL
+  # session 失效时间
+  session:
+    timeout: 86400
+server:
+  address: 0.0.0.0
+#  SEnZxsdx9ra:nzL  数据库密码

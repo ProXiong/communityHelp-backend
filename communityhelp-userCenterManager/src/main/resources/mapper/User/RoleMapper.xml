@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quan.communityhelpuserCenterManager.mapper.User.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.quan.communityhelpModel.domain.Role">
+            <id property="roleId" column="roleId" jdbcType="BIGINT"/>
+            <result property="roleName" column="roleName" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getRolesByIds" resultType="com.quan.communityhelpModel.domain.Role">
+        SELECT *
+        FROM Role
+        WHERE roleId IN
+        <foreach item="id" collection="roleIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <sql id="Base_Column_List">
+        roleId,roleName,description
+    </sql>
+</mapper>
