@@ -16,7 +16,6 @@ public class RolePermission implements Serializable {
      *
      */
     @TableField(value = "roleId")
-    S
     private Long roleId;
 
     /**
@@ -40,8 +39,7 @@ public class RolePermission implements Serializable {
             return false;
         }
         RolePermission other = (RolePermission) that;
-        return (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()))
-                && (this.getPermissionId() == null ? other.getPermissionId() == null : this.getPermissionId().equals(other.getPermissionId()));
+        return (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId())) && (this.getPermissionId() == null ? other.getPermissionId() == null : this.getPermissionId().equals(other.getPermissionId()));
     }
 
     @Override

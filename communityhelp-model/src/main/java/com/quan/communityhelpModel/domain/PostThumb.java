@@ -21,7 +21,7 @@ public class PostThumb implements Serializable {
      * id
      */
     @TableId(type = IdType.AUTO)
-    private User id;
+    private Long id;
 
     /**
      * 帖子 id

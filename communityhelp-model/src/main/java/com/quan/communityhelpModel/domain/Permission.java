@@ -18,7 +18,7 @@ public class Permission implements Serializable {
      *
      */
     @TableId(type = IdType.AUTO)
-    private User permissionId;
+    private Long permissionId;
 
     /**
      *

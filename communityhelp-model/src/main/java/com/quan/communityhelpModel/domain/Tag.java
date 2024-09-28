@@ -20,7 +20,7 @@ public class Tag implements Serializable {
      * 标签 ID
      */
     @TableId(type = IdType.AUTO)
-    private User tagId;
+    private Long tagId;
 
     /**
      * 标签名称
