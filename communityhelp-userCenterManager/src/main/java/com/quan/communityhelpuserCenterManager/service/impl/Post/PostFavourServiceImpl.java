@@ -14,6 +14,7 @@ import com.quan.communityhelpuserCenterManager.mapper.Post.PostFavourMapper;
 import com.quan.communityhelpuserCenterManager.service.inter.Post.PostFavourService;
 import com.quan.communityhelpuserCenterManager.service.inter.Post.PostService;
 import org.springframework.aop.framework.AopContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,11 @@ public class PostFavourServiceImpl extends ServiceImpl<PostFavourMapper, PostFav
 
     @Resource
     private PostService postService;
+
+    @Autowired
+    public PostFavourServiceImpl(PostService postService) {
+        this.postService = postService;
+    }
 
     /**
      * 帖子收藏
