@@ -20,7 +20,6 @@
         <module>CH-core</module>
         <module>CH-model</module>
         <module>CH-common</module>
-        <module>CH-core</module>
     </modules>
 
     <properties>
@@ -107,18 +106,6 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-
-
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <!-- Spring Boot Maven Plugin -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
